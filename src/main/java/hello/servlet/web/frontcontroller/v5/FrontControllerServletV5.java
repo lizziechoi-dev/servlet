@@ -51,6 +51,7 @@ public class FrontControllerServletV5 extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 1. 핸들러 조회
         Object handler = getHandler(request);
 
         if (handler == null) {
@@ -58,13 +59,17 @@ public class FrontControllerServletV5 extends HttpServlet {
             return;
         }
 
+        // 2. 핸들러 어댑터 조회
         MyHandlerAdapter adapter = getHandlerAdapter(handler);
 
+        // 3. 어댑터 실행
         ModelView mv = adapter.handle(request, response, handler);
 
+        // 6, 7. 뷰 리졸버 실행 및 MyView 반환
         String viewName = mv.getViewName();// 논리이름 new-form
         MyView view = viewResolver(viewName);
 
+        // 8. 렌더링
         view.render(mv.getModel(), request, response);
     }
 

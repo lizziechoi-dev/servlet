@@ -25,8 +25,10 @@ public class ControllerV4HandlerAdapter implements MyHandlerAdapter {
         Map<String, String> paramMap = createParamMap(request);
         Map<String, Object> model = new HashMap<>();
 
+        // 4. 실제 컨트롤러 호출
         String viewName = controller.process(paramMap, model);
 
+        // 5. ModelView 생성
         ModelView mv = new ModelView(viewName);
         mv.setModel(model);
 

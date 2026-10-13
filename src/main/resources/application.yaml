@@ -1,6 +1,11 @@
 spring:
   application:
     name: servlet
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+
 logging:
   level:
     org:
